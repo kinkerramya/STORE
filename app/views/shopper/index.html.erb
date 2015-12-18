@@ -1,0 +1,29 @@
+
+  <%= form_tag( products_path, :method => "get", class: "navbar-form", id: "search-form") do %>
+    <div class="input-append">
+      <%= text_field_tag :search, params[:search], class: "span2" %>
+      
+      <button class="btn" type="submit"><i class="icon-search">search</i>Search</button>
+    </div>
+  <% end %>
+<h1>Product Catalog</h1>
+<% @products.each do |product| %>
+
+  <div class="entry">
+    <%= image_tag(product.image) %>
+
+    <h3><%= product.name %></h3>
+
+   <p> <%= sanitize(product.description) %></p>
+
+    <div class="price_line">
+
+      <span class="price"><%= number_to_currency(product.price) %></span>
+      <!--class is not necessary, but to show how to add class -->
+      <%=button_to'Add to Cart',line_items_path(product_id:product),class:'add_to_cart', remote:true%>
+
+    </div>
+
+  </div>
+
+<% end %>
